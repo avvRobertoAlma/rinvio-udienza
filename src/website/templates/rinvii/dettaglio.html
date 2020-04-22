@@ -15,10 +15,14 @@
             <ul>
                 <li><b>Ufficio: </b>{{rinvio.giudici.first.ufficio}}</li>
                 <li><b>Giudice: </b>{{rinvio.giudici.first}}</li>
+                {% if rinvio.data_udienza_rinviata %}
                 <li><b>Data udienza rinviata: </b>{{rinvio.data_udienza_rinviata}}</li>
+                {% endif %}
+                {% if rinvio.data_rinvio %}
                 <li><b>Data del rinvio: </b>{{rinvio.data_rinvio}}</li>
-                {% if rinvio.descrizione %}
-                <li><b>Descrizione: </b>{{rinvio.descrizione}}</li>
+                {% endif %}
+                {% if rinvio.testo %}
+                <li><b>Descrizione: </b>{{rinvio.testo}}</li>
                 {% endif %}
             </ul>
         </div>
