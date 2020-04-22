@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero is-info">
+    <div class="hero-body">
+        <h1 class="title has-text-centered">Lista Rinvii</h1>
+        <h2 class="subtitle has-text-centered">Seleziona un Rinvio</h2> 
+    </div>
+</section>
+
+<section class="section">
+    <table class="table is-fullwidth is-hoverable">
+        <thead>
+            <tr>
+                <th>Data inserimento</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rinvio in giudice.rinvii.all %}
+            <tr>
+                <td>{{rinvio.created}}</td>
+                <td><a href="{% url 'dettaglio rinvio' rinvio.pk %}">Dettaglio</a></td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+
+{% endblock %}

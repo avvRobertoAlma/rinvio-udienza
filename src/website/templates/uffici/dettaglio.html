@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero is-info">
+    <div class="hero-body">
+        <h1 class="title has-text-centered">Lista Giudici</h1>
+        <h2 class="subtitle has-text-centered">Seleziona un Giudice</h2> 
+    </div>
+</section>
+
+<section class="section">
+    <table class="table is-fullwidth is-hoverable">
+        <thead>
+            <tr>
+                <th>Giudici</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for giudice in ufficio.giudici.all %}
+            <tr>
+                <td>
+                    <a href="{% url 'dettaglio giudice' giudice.pk %}">{{giudice.nome}} {{giudice.cognome}}</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+
+{% endblock %}

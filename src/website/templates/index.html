@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<section class="hero is-info">
+    <div class="hero-body">
+        <h1 class="title has-text-centered">Rinvio Udienza v. 1.0</h1>
+        <h2 class="subtitle has-text-centered">A cura degli avv.ti Francesco Saverio Orlando e Roberto Alma</h2> 
+    </div>
+</section>
+
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <div class="box">
+                <a href="{% url 'lista rinvii' %}">Consulta rinvii</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="box">
+                <a href="{% url 'lista uffici' %}">Lista uffici</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="box">
+                <p>Collabora con noi</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

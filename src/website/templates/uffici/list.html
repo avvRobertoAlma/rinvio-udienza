@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero is-info">
+    <div class="hero-body">
+        <h1 class="title has-text-centered">Lista Uffici</h1>
+        <h2 class="subtitle has-text-centered">Seleziona un ufficio giudiziario</h2> 
+    </div>
+</section>
+
+<section class="section">
+    <table class="table is-fullwidth is-hoverable">
+        <thead>
+            <tr>
+                <th>Ufficio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ufficio in uffici %}
+            <tr>
+                <td>
+                    <a href="{% url 'dettaglio ufficio' ufficio.pk %}">{{ufficio}}</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+
+{% endblock %}
