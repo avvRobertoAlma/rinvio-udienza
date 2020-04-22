@@ -1,0 +1,10 @@
+src/db.sqlite3
+.env/*
+.vscode/*
+*.pyc
+__pycache__
+src/website/__pycache__/*
+src/website/migrations/*
+src/website/migrations/
+src/src/__pycache__/*
+src/website/uploads/*

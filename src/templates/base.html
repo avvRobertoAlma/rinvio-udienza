@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+
+  <title>{%block title %} i-Rinvio {%endblock title %}</title>
+  <meta name="description" content="i-Rinvio">
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <section class="section">
+    
+    <!--{% if request.user.is_authenticated %}-->
+        
+    <!--{% endif %}-->
+    
+    </section>
+    <section class="section">
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </section>
+
+{% block footer %}
+{% endblock footer %}
+  
+</body>
+</html>

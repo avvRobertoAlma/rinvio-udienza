@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero is-info">
+    <div class="hero-body">
+        <h1 class="title has-text-centered">Dettaglio Rinvio</h1>
+        <h2 class="subtitle has-text-centered">Visualizza informazioni sul rinvio</h2> 
+    </div>
+</section>
+
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <ul>
+                <li><b>Ufficio: </b>{{rinvio.giudici.first.ufficio}}</li>
+                <li><b>Giudice: </b>{{rinvio.giudici.first}}</li>
+                <li><b>Data udienza rinviata: </b>{{rinvio.data_udienza_rinviata}}</li>
+                <li><b>Data del rinvio: </b>{{rinvio.data_rinvio}}</li>
+                {% if rinvio.descrizione %}
+                <li><b>Descrizione: </b>{{rinvio.descrizione}}</li>
+                {% endif %}
+            </ul>
+        </div>
+        {% if rinvio.immagine %}
+        <div class="column">
+            <figure class="image is-1by1">
+                <img src="{{rinvio.immagine.url|safe}}" />
+            </figure>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
