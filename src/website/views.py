@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Rinvio, Ufficio, Giudice
+from .forms import RinvioModelForm
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -56,3 +59,29 @@ def dettaglio_rinvio(request, pk):
         "rinvio":rinvio
     }
     return render(request, 'rinvii/dettaglio.html', context)
+
+@login_required
+def aggiungi_rinvio(request, pk):
+    # trova il giudice
+    giudice = Giudice.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = RinvioModelForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            try:
+                nuovo_rinvio = form.save()
+                giudice.rinvii.add(nuovo_rinvio)
+
+                return HttpResponseRedirect(f'/giudici/{pk}')
+
+            except Exception as e:
+                print(e)
+
+    else:
+        form = RinvioModelForm()
+        context = {"form": form}
+        return render(request, 'uffici/giudici/add.html', context)
+
+
+

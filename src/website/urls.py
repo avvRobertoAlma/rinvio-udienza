@@ -11,6 +11,7 @@ urlpatterns = [
     path('uffici/<int:pk>', views.dettaglio_ufficio, name="dettaglio ufficio"),
     path('giudici', views.lista_uffici, name="lista giudici"),
     path('giudici/<int:pk>', views.dettaglio_giudice, name="dettaglio giudice"),
+    path('giudici/<int:pk>/add', views.aggiungi_rinvio, name="aggiungi rinvio"),
     path('rinvii', views.lista_Rinvii, name="lista rinvii"),
     path('rinvii/<int:pk>', views.dettaglio_rinvio, name="dettaglio rinvio")
 ]

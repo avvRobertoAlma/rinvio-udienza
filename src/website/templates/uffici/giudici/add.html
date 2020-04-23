@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero is-info">
+    <div class="hero-body">
+        <h1 class="title has-text-centered">Aggiungi un rinvio</h1>
+        <h2 class="subtitle has-text-centered">Compila i campi che seguono per caricare un rinvio</h2> 
+    </div>
+</section>
+<section class="section">
+    
+    <div class="box">
+    <form class="form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="field">
+            <div class="control">
+                <input class="input is-info" name="data_udienza_rinviata" type="date" placeholder="Data udienza rinviata" />
+            </div>
+        </div>
+         <div class="field">
+            <div class="control">
+                <input class="input is-info" name="data_rinvio" type="date" placeholder="Data del rinvio" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input is-info" name="testo" type="text" placeholder="Descrizione" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input is-info" name="immagine" type="file" placeholder="Immagine" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="button is-info" type="submit" value="login" />
+            </div>
+        </div>
+
+    </form>
+    </div>
+
+</section>
+
+{% endblock %}

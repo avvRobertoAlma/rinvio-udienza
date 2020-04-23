@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'website',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,3 +128,6 @@ MEDIA_ROOT = (
 )
 
 MEDIA_URL = "/uploads/"
+
+
+LOGIN_REDIRECT_URL = ""

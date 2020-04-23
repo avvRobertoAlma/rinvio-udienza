@@ -22,11 +22,16 @@
                 <a href="{% url 'lista uffici' %}">Lista uffici</a>
             </div>
         </div>
-        <div class="column">
-            <div class="box">
-                <p>Collabora con noi</p>
+       
+            {% if not request.user.is_authenticated %}
+             <div class="column">
+                <div class="box">
+                    <a href="{% url 'login' %}">Collabora con noi</a>
+                </div>
             </div>
-        </div>
+            {% endif %}
+            
+        
     </div>
 
 </section>

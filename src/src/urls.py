@@ -18,11 +18,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 import website.urls
+import users.urls
 
 
 urlpatterns = [
-    path('app/', include(website.urls)),
+    path('', include(website.urls)),
     path('admin/', admin.site.urls),
+    path('users/', include(users.urls)),
 ]
 
 if settings.DEBUG:
