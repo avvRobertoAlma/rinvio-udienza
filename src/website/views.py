@@ -2,7 +2,11 @@ from django.shortcuts import render
 from .models import Rinvio, Ufficio, Giudice
 from .forms import RinvioModelForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
+from django.core import serializers
+from django.contrib import messages 
+
+
 
 # Create your views here.
 
@@ -42,9 +46,6 @@ def dettaglio_giudice(request, pk):
 def lista_Rinvii(request):
     # ottiene la lista di tutti i rinvii dal DB
     rinvii = Rinvio.objects.all().order_by('-created')
-
-    for rinvio in rinvii:
-        print(rinvio.giudici)
         
 
     context = {
@@ -61,27 +62,38 @@ def dettaglio_rinvio(request, pk):
     return render(request, 'rinvii/dettaglio.html', context)
 
 @login_required
-def aggiungi_rinvio(request, pk):
-    # trova il giudice
-    giudice = Giudice.objects.get(pk=pk)
+def aggiungi_rinvio(request):
 
     if request.method == 'POST':
         form = RinvioModelForm(request.POST, request.FILES)
 
         if form.is_valid():
+            print('form è valido')
             try:
                 nuovo_rinvio = form.save()
-                giudice.rinvii.add(nuovo_rinvio)
 
-                return HttpResponseRedirect(f'/giudici/{pk}')
+                return HttpResponseRedirect(f'/rinvii')
 
             except Exception as e:
+                print('Form non è valido')
                 print(e)
+        else:
+            print('Errore ?')
+            print(messages.error(request, "Error"))
 
     else:
         form = RinvioModelForm()
         context = {"form": form}
-        return render(request, 'uffici/giudici/add.html', context)
+        return render(request, 'rinvii/add.html', context)
+
+def carica_giudici(request):
+    ufficio_id = request.GET.get('ufficio')
+    giudici = Giudice.objects.filter(ufficio=ufficio_id)
+    #return render(request, 'dropdown_giudici.html', {'giudici': giudici})
+    # data = serializers.serialize("json", giudici)
+    data = [{"pk": str(giudice.pk), "giudice": str(giudice)} for giudice in giudici]
+    return JsonResponse(data, safe=False)
+
 
 
 

@@ -23,10 +23,10 @@
             {% for rinvio in rinvii %}
             <tr>
                 <td>
-                    {{rinvio.giudici.first.ufficio}}
+                    {{rinvio.giudice.ufficio}}
                 </td>
                 <td>
-                    {{rinvio.giudici.first}}
+                    {{rinvio.giudice}}
                 </td>
                 <td>{{rinvio.created}}</td>
                 <td><a href="{% url 'dettaglio rinvio' rinvio.pk %}">Dettaglio</a></td>

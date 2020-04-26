@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 
 from django import forms
-from .models import Rinvio
+from .models import Rinvio, Giudice
 
 class RinvioModelForm(ModelForm):
     class Meta:
