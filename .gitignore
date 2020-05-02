@@ -8,3 +8,4 @@ src/website/migrations/*
 src/website/migrations/
 src/src/__pycache__/*
 src/uploads/*
+.env
