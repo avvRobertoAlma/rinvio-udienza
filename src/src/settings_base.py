@@ -130,4 +130,4 @@ MEDIA_ROOT = (
 MEDIA_URL = "/uploads/"
 
 
-LOGIN_REDIRECT_URL = ""
+LOGIN_REDIRECT_URL = "/"
