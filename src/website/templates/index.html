@@ -29,6 +29,12 @@
                     <a href="{% url 'login' %}">Collabora con noi</a>
                 </div>
             </div>
+            {% else %}
+            <div class="column">
+                <div class="box">
+                    <a href="{% url 'aggiungi rinvio' %}">Aggiungi rinvio</a>
+                </div>
+            </div>
             {% endif %}
             
         
