@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.contrib import messages 
 
+from datetime import datetime
+
 
 
 # Create your views here.
@@ -29,7 +31,8 @@ def dettaglio_ufficio(request, pk):
     return render(request, 'uffici/dettaglio.html', context)
 
 def lista_giudici(request):
-    giudici = Giudice.objects.all()
+    giudici = Giudice.objects.all().order_by('cognome')
+    print(giudici)
     context = {
         "giudici":giudici
     }
@@ -44,8 +47,24 @@ def dettaglio_giudice(request, pk):
     return render(request, 'uffici/giudici/dettaglio.html', context)
 
 def lista_Rinvii(request):
-    # ottiene la lista di tutti i rinvii dal DB
-    rinvii = Rinvio.objects.all().order_by('-created')
+    # verifica se ci sono query nella richiesta
+    if 'filter' in request.GET:
+        if request.GET['from_date']:
+            from_date = request.GET['from_date']
+        else:
+            from_date = '2020-04-01'
+
+        if request.GET['to_date']:
+            to_date = request.GET['to_date']
+        else:
+            to_date = datetime.now()
+
+
+
+        rinvii = Rinvio.objects.filter(giudice__cognome__icontains=request.GET['giudice'],data_udienza_rinviata__gte=from_date,data_udienza_rinviata__lte=to_date).order_by('-created')
+    else:
+        # ottiene la lista di tutti i rinvii dal DB
+        rinvii = Rinvio.objects.all().order_by('-created')
         
 
     context = {
@@ -88,7 +107,7 @@ def aggiungi_rinvio(request):
 
 def carica_giudici(request):
     ufficio_id = request.GET.get('ufficio')
-    giudici = Giudice.objects.filter(ufficio=ufficio_id)
+    giudici = Giudice.objects.filter(ufficio=ufficio_id).order_by('cognome')
     #return render(request, 'dropdown_giudici.html', {'giudici': giudici})
     # data = serializers.serialize("json", giudici)
     data = [{"pk": str(giudice.pk), "giudice": str(giudice)} for giudice in giudici]

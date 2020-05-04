@@ -27,9 +27,9 @@ class Giudice(models.Model):
     sezione = models.CharField(max_length=500, blank=True)
     def __str__(self):
         if self.sezione:
-            return f"{self.nome} {self.cognome} - Sezione: {self.sezione}"
+            return f"{self.cognome} {self.nome} - Sezione: {self.sezione}"
         else: 
-            return f"{self.nome} {self.cognome}"
+            return f"{self.cognome} {self.nome}"
 
 
 class Rinvio(models.Model):

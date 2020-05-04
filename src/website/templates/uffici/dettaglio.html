@@ -17,10 +17,10 @@
             </tr>
         </thead>
         <tbody>
-            {% for giudice in ufficio.giudici.all %}
+            {% for giudice in ufficio.giudici.all|dictsort:"cognome" %}
             <tr>
                 <td>
-                    <a href="{% url 'dettaglio giudice' giudice.pk %}">{{giudice.nome}} {{giudice.cognome}}</a>
+                    <a href="{% url 'dettaglio giudice' giudice.pk %}">{{giudice.cognome}} {{giudice.nome}}</a>
                 </td>
             </tr>
 
