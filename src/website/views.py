@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Rinvio, Ufficio, Giudice
-from .forms import RinvioModelForm
+from .forms import RinvioModelForm, RinvioGiudiceModelForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
 from django.core import serializers
@@ -55,6 +55,33 @@ def dettaglio_giudice(request, pk):
     
     return render(request, 'uffici/giudici/dettaglio.html', context)
 
+@login_required
+def aggiungi_rinvio_giudice(request, pk):
+    giudice = Giudice.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = RinvioGiudiceModelForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            print('form è valido')
+            try:
+                nuovo_rinvio = Rinvio(ufficio=giudice.ufficio, giudice=giudice, data_udienza_rinviata=form.cleaned_data['data_udienza_rinviata'], data_rinvio=form.cleaned_data['data_rinvio'], testo=form.cleaned_data['testo'], immagine=form.cleaned_data['immagine'])
+                nuovo_rinvio.save()
+
+                return HttpResponseRedirect(f'/giudici/{giudice.pk}')
+
+            except Exception as e:
+                print('Form non è valido')
+                print(e)
+        else:
+            print('Errore ?')
+            print(messages.error(request, "Error"))
+
+    else:
+        form = RinvioGiudiceModelForm()
+        context = {"form": form}
+        return render(request, 'uffici/giudici/add_rinvio.html', context)
+
 def lista_Rinvii(request):
     # verifica se ci sono query nella richiesta
     if 'filter' in request.GET:
@@ -73,7 +100,7 @@ def lista_Rinvii(request):
         rinvii = Rinvio.objects.filter(giudice__cognome__icontains=request.GET['giudice'],data_udienza_rinviata__gte=from_date,data_udienza_rinviata__lte=to_date).order_by('-data_udienza_rinviata')
     else:
         # ottiene la lista di tutti i rinvii dal DB
-        rinvii = Rinvio.objects.all().order_by('-created')
+        rinvii = Rinvio.objects.all().order_by('-data_udienza_rinviata')
 
     # Codice per pagination
     paginator = Paginator(rinvii, 10) # mostra 5 tesserati per pagina

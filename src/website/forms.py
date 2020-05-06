@@ -7,3 +7,8 @@ class RinvioModelForm(ModelForm):
     class Meta:
         model = Rinvio
         exclude = ('created',)
+
+class RinvioGiudiceModelForm(ModelForm):
+    class Meta:
+        model = Rinvio
+        exclude = ('ufficio', 'giudice', 'created')

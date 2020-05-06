@@ -11,6 +11,15 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
+<style>
+.footer {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+}
+</style>
+
 <body>
     {% include 'navbar.html' %}
     <section class="section">
@@ -21,8 +30,8 @@
 
     </section>
 
-{% block footer %}
-{% endblock footer %}
+{% include 'footer.html' %}
+
   
 </body>
 </html>

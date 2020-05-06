@@ -13,6 +13,7 @@
     <form class="form" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
         <div class="field">
+        <label class="label">Ufficio</label>
             <div class="select is-fullwidth">
                 <select name="ufficio" v-model="ufficio" @change="carica_giudici">
                     {% for option in form.ufficio %}
@@ -22,6 +23,7 @@
             </div>
         </div><!-- end field -->
         <div class="field" v-if="mostraGiudice">
+        <label class="label">Giudice</label>
             <div class="select is-fullwidth">
                 <select name="giudice" @change="mostraCompletoForm">
                     <option value="">Seleziona un giudice</option>
@@ -31,21 +33,25 @@
         </div><!-- end field -->
         <div v-if="mostraCampi">
         <div class="field">
+        <label class="label">Data dell'udienza che è stata rinviata</label>
             <div class="control">
                 <input class="input is-info" name="data_udienza_rinviata" required type="date" placeholder="Data udienza rinviata" />
             </div>
         </div>
          <div class="field">
+         <label class="label">Data della prossima Udienza</label>
             <div class="control">
                 <input class="input is-info" name="data_rinvio" type="date" placeholder="Data del rinvio" />
             </div>
         </div>
         <div class="field">
+        <label class="label">Descrizione del rinvio (note particolari)</label>
             <div class="control">
                 <input class="input is-info" name="testo" type="text" placeholder="Descrizione" />
             </div>
         </div>
         <div class="field">
+         <label class="label">Immagine</label>
             <div class="control">
                 <input class="input is-info" name="immagine" type="file" placeholder="Immagine" />
             </div>
