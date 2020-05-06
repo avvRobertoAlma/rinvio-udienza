@@ -13,12 +13,23 @@
 
 <style>
 
+.Site{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content{
+  flex: 1;
+}
+
 .footer {
 height:15vh;
 }
 </style>
 
-<body>
+<body class="Site">
+    <div class="Site-content">
     {% include 'navbar.html' %}
     <section class="section">
         
@@ -27,7 +38,7 @@ height:15vh;
             {% endblock content %}
 
     </section>
-
+    </div>
 {% include 'footer.html' %}
 
   
