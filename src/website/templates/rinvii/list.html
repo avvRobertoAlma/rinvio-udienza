@@ -40,7 +40,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for rinvio in rinvii %}
+            {% for rinvio in page_obj %}
             <tr>
                 <td>
                     {{rinvio.giudice.ufficio}}
@@ -55,6 +55,28 @@
             {% endfor %}
         </tbody>
     </table>
+    <br />
+        <nav class="level">
+        <div class="level-left">
+            <div class="level-item">
+                {% if page_obj.has_previous %}
+                <a class="button" href="?page={{page_obj.previous_page_number}}">Indietro</a>
+                {% else %}
+                <a class="button" disabled>Indietro</a>
+                {% endif %}
+               
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                 {% if page_obj.has_next %}
+                <button class="button" onclick="window.location.href='?page={{page_obj.next_page_number}}'">Avanti</button>
+                {% else %}
+                <button class="button" disabled>Avanti</button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
 
 </section>
 

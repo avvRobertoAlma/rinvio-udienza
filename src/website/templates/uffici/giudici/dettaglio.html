@@ -28,20 +28,42 @@
     <table class="table is-fullwidth is-hoverable">
         <thead>
             <tr>
-                <th>Data inserimento</th>
+                <th>Udienza Rinviata</th>
                 <th>Azioni</th>
             </tr>
         </thead>
         <tbody>
-            {% for rinvio in giudice.rinvii.all %}
+            {% for rinvio in page_obj %}
             <tr>
-                <td>{{rinvio.created}}</td>
+                <td>{{rinvio.data_udienza_rinviata}}</td>
                 <td><a href="{% url 'dettaglio rinvio' rinvio.pk %}">Dettaglio</a></td>
             </tr>
 
             {% endfor %}
         </tbody>
     </table>
+     <br />
+        <nav class="level">
+        <div class="level-left">
+            <div class="level-item">
+                {% if page_obj.has_previous %}
+                <a class="button" href="?page={{page_obj.previous_page_number}}">Indietro</a>
+                {% else %}
+                <a class="button" disabled>Indietro</a>
+                {% endif %}
+               
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                 {% if page_obj.has_next %}
+                <button class="button" onclick="window.location.href='?page={{page_obj.next_page_number}}'">Avanti</button>
+                {% else %}
+                <button class="button" disabled>Avanti</button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
 
 </section>
 
