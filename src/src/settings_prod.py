@@ -19,6 +19,8 @@ DATABASES = {
     }
 }
 
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 # indirizzo del server da dove saranno serviti i file statici
 STATIC_URL = "https://cdn.rinviogdp.it/"
 
