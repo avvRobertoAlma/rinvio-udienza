@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for giudice in ufficio.giudici.all|dictsort:"cognome" %}
+            {% for giudice in page_obj %}
             <tr>
                 <td>
                     <a href="{% url 'dettaglio giudice' giudice.pk %}">{{giudice.cognome}} {{giudice.nome}}</a>
@@ -27,6 +27,28 @@
             {% endfor %}
         </tbody>
     </table>
+    <br />
+        <nav class="level">
+        <div class="level-left">
+            <div class="level-item">
+                {% if page_obj.has_previous %}
+                <a class="button" href="?page={{page_obj.previous_page_number}}">Indietro</a>
+                {% else %}
+                <a class="button" disabled>Indietro</a>
+                {% endif %}
+               
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                 {% if page_obj.has_next %}
+                <button class="button" onclick="window.location.href='?page={{page_obj.next_page_number}}'">Avanti</button>
+                {% else %}
+                <button class="button" disabled>Avanti</button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
 
 </section>
 

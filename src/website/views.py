@@ -25,18 +25,28 @@ def lista_uffici(request):
 
 def dettaglio_ufficio(request, pk):
     ufficio = Ufficio.objects.get(pk=pk)
+    giudici = ufficio.giudici.all().order_by('cognome')
 
+    # Codice per pagination
+    paginator = Paginator(giudici, 5) # mostra 5 rinvii per pagina
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        "ufficio":ufficio
+        "ufficio":ufficio,
     }
+    context["page_obj"] = page_obj
+
     return render(request, 'uffici/dettaglio.html', context)
 
 def lista_giudici(request):
     giudici = Giudice.objects.all().order_by('cognome')
-    print(giudici)
-    context = {
-        "giudici":giudici
-    }
+    
+    # Codice per pagination
+    paginator = Paginator(giudici, 5) # mostra 5 rinvii per pagina
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context["page_obj"] = page_obj
+
     return render(request, 'giudici/list.html', context)
 
 def dettaglio_giudice(request, pk):
@@ -44,7 +54,7 @@ def dettaglio_giudice(request, pk):
     rinvii = giudice.rinvii.all().order_by('-data_udienza_rinviata')
 
      # Codice per pagination
-    paginator = Paginator(rinvii, 10) # mostra 10 rinvii per pagina
+    paginator = Paginator(rinvii, 5) # mostra 5 rinvii per pagina
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
