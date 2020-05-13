@@ -162,6 +162,9 @@ def carica_giudici(request):
     data = [{"pk": str(giudice.pk), "giudice": str(giudice)} for giudice in giudici]
     return JsonResponse(data, safe=False)
 
+def chi_siamo(request):
+    return render(request, 'chi_siamo.html')
+
 
 
 
