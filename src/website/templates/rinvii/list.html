@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% load tags %}
+
+
 {% block content %}
 
 <style>
@@ -67,7 +70,7 @@
         <div class="level-left">
             <div class="level-item">
                 {% if page_obj.has_previous %}
-                <a class="button" href="?page={{page_obj.previous_page_number}}">Indietro</a>
+                <a class="button" href="{% url 'lista rinvii' %}?{% param_replace page=page_obj.previous_page_number %}">Indietro</a>
                 {% else %}
                 <a class="button" disabled>Indietro</a>
                 {% endif %}
@@ -77,7 +80,7 @@
         <div class="level-right">
             <div class="level-item">
                  {% if page_obj.has_next %}
-                <button class="button" onclick="window.location.href='?page={{page_obj.next_page_number}}'">Avanti</button>
+                <a class="button" href="{% url 'lista rinvii' %}?{% param_replace page=page_obj.next_page_number %}">Avanti</a>
                 {% else %}
                 <button class="button" disabled>Avanti</button>
                 {% endif %}
