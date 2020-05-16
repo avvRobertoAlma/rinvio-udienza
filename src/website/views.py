@@ -95,12 +95,12 @@ def aggiungi_rinvio_giudice(request, pk):
 def lista_Rinvii(request):
     # verifica se ci sono query nella richiesta
     if 'filter' in request.GET:
-        if request.GET['from_date']:
+        if 'from_date' in request.GET:
             from_date = request.GET['from_date']
         else:
             from_date = '2020-04-01'
 
-        if request.GET['to_date']:
+        if 'to_date' in request.GET:
             to_date = request.GET['to_date']
         else:
             to_date = datetime.now()
