@@ -96,12 +96,18 @@ def lista_Rinvii(request):
     # verifica se ci sono query nella richiesta
     if 'filter' in request.GET:
         if 'from_date' in request.GET:
-            from_date = request.GET['from_date']
+            if len(request.GET['from_date']) > 1:
+                from_date = request.GET['from_date']
+            else:
+                from_date = '2020-04-01'
         else:
             from_date = '2020-04-01'
 
         if 'to_date' in request.GET:
-            to_date = request.GET['to_date']
+            if len(request.GET['to_date']) > 1:
+                to_date = request.GET['to_date']
+            else:
+                to_date = datetime.now()
         else:
             to_date = datetime.now()
 
