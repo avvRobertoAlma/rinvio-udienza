@@ -160,6 +160,15 @@ def aggiungi_rinvio(request):
         context = {"form": form}
         return render(request, 'rinvii/add.html', context)
 
+@login_required
+# elimina un rinvio
+# @param pk è id del rinvio da eliminare
+def elimina_rinvio(request, pk):
+    rinvio = Rinvio.objects.get(pk=pk)
+    rinvio.delete()
+    return HttpResponseRedirect(f'/rinvii')
+
+
 def carica_giudici(request):
     ufficio_id = request.GET.get('ufficio')
     giudici = Giudice.objects.filter(ufficio=ufficio_id).order_by('cognome')

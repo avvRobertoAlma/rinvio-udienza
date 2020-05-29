@@ -24,6 +24,10 @@
                 {% if rinvio.testo %}
                 <li><b>Descrizione: </b>{{rinvio.testo}}</li>
                 {% endif %}
+                {% if request.user.is_authenticated %}
+                <br />
+                <a href="{% url 'elimina rinvio' rinvio.pk %}" class="button is-danger">Elimina</a>
+                {% endif %}
             </ul>
         </div>
         {% if rinvio.immagine %}

@@ -16,6 +16,7 @@ urlpatterns = [
     path('rinvii/add', views.aggiungi_rinvio, name="aggiungi rinvio"),
     path('rinvii', views.lista_Rinvii, name="lista rinvii"),
     path('rinvii/<int:pk>', views.dettaglio_rinvio, name="dettaglio rinvio"),
+    path('rinvii/<int:pk>/elimina_rinvio', views.elimina_rinvio, name="elimina rinvio"),
     path('api/carica-giudici', views.carica_giudici, name="carica giudici")
 ]
 
