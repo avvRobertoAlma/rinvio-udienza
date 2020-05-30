@@ -7,7 +7,7 @@ from django.core import serializers
 from django.contrib import messages 
 from django.core.paginator import Paginator
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 
@@ -94,6 +94,7 @@ def aggiungi_rinvio_giudice(request, pk):
 
 def lista_Rinvii(request):
     # verifica se ci sono query nella richiesta
+    # se non viene passato il parametro "to_date" cerca tutte le udienze rinviate dei prossimi 90 giorni
     if 'filter' in request.GET:
         if 'from_date' in request.GET:
             if len(request.GET['from_date']) > 1:
@@ -107,9 +108,9 @@ def lista_Rinvii(request):
             if len(request.GET['to_date']) > 1:
                 to_date = request.GET['to_date']
             else:
-                to_date = datetime.now()
+                to_date = datetime.now() + timedelta(days=90)
         else:
-            to_date = datetime.now()
+            to_date = datetime.now() + timedelta(days=90)
 
 
 
